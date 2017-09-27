@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
-
   validates :name, presence: true
   validates :email, uniqueness: true, email: true
+
+  mount_uploader :profile_image, ImageUploader
 
   def set_default_role
     self.role ||= :user

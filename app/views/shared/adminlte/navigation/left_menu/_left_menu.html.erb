@@ -3,7 +3,7 @@
 
     <div class="user-panel">
       <div class="pull-left image">
-        <%= image_tag "http://placehold.it/160x160", class: "img-circle" %>
+        <%= image_tag current_user.profile_image, class: "img-circle" %>
       </div>
       <div class="pull-left info">
         <p><%= current_user.name %></p>

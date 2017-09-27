@@ -20,6 +20,8 @@ gem 'pundit'
 gem 'sendgrid'
 gem 'layer-handler'
 gem 'friendly_id'
+gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
 
 # Only Development env gems
 group :development do
