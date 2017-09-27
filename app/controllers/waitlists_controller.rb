@@ -4,7 +4,7 @@ class WaitlistsController < ApplicationController
   # GET /waitlists
   # GET /waitlists.json
   def index
-    @waitlists = Waitlist.all
+    @waitlists = Waitlist.order(:created_at).page params[:page]
     render :layout => 'adminlte'
   end
 
