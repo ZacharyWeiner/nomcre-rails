@@ -5,6 +5,6 @@
  *= require back/bootstrap-tagsinput/bootstrap-tagsinput
  *= require back/datatables/dataTables.bootstrap.css
  *= require back/AdminLTE
- *= require back/skins/skin-blue
+ *= require back/skins/skin-black
  *= require_self
  */

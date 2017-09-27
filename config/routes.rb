@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   devise_for :users, only: [:session, :registration], path: 'session',
              path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
+
+  get 'adminlte', to:'pages#adminlte'
+
   # Application root
   root to: 'application#home'
   # Front routes end

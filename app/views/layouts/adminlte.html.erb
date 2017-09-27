@@ -17,8 +17,8 @@
   <body class="hold-transition skin-black sidebar-mini">
 
     <div class="wrapper">
-      <%= render partial: 'admin/shared/header' %>
-      <%= render partial: 'admin/shared/sidebar' %>
+      <%= render partial: 'shared/adminlte/navigation/top_menu/top_navigation' %>
+      <%= render partial: 'shared/adminlte/navigation/left_menu/left_menu' %>
       <div class="content-wrapper">
         <%= render partial: 'admin/shared/content_header' %>
         <section class="content">
@@ -26,7 +26,7 @@
           <%= yield %>
         </section>
       </div>
-      <%= render partial: 'admin/shared/footer' %>
+      <%= render partial: 'shared/adminlte/footer' %>
     </div>
   </body>
 
