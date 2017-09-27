@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :authorize, except: [:new, :create]
+  before_action :authorize, except: [:new, :create, :show]
   layout 'adminlte'
 
   # GET /companies
