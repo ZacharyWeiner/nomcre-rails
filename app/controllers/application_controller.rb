@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   def force_set_company
     unless request.path.include?('companies')
       unless current_user.nil? || current_user.user_type != 'company'
-        byebug
         if current_user.company.nil?
           redirect_to new_company_path
         end

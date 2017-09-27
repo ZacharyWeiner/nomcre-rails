@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, except: [:new, :create]
   layout 'adminlte'
+
   # GET /companies
   # GET /companies.json
   def index
@@ -77,5 +79,11 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :logo, :phone, :website)
+    end
+
+    def authorize
+      unless current_user.company == @company
+        redirect_to adminlte_path
+      end
     end
 end
