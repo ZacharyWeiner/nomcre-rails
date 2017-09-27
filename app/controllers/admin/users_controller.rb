@@ -29,7 +29,6 @@ module Admin
     # POST /users.json
     def create
       @user = User.new(user_params)
-
       if @user.save
         flash[:notice] = t('admin.users.create.success')
         respond_with :edit, :admin, @user
