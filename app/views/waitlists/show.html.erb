@@ -1,0 +1,47 @@
+<div class='row'>
+  <div class='col-md-6'>
+    <p>
+      <strong>Name:</strong>
+      <%= @waitlist.name %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @waitlist.email %>
+    </p>
+
+    <p>
+      <strong>Instragram:</strong>
+      <%= @waitlist.instragram %>
+    </p>
+
+    <p>
+      <strong>Px500:</strong>
+      <%= @waitlist.px500 %>
+    </p>
+  </div>
+  <div class='col-md-6'>
+    <p>
+      <strong>Facebook:</strong>
+      <%= @waitlist.facebook %>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      <%= @waitlist.phone %>
+    </p>
+
+    <p>
+      <strong>Website:</strong>
+      <%= @waitlist.website %>
+    </p>
+
+    <p>
+      <strong>Smugmug:</strong>
+      <%= @waitlist.smugmug %>
+    </p>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_waitlist_path(@waitlist) %> |
+<%= link_to 'Back', waitlists_path %>
