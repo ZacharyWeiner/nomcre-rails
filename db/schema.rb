@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927175004) do
+ActiveRecord::Schema.define(version: 20170927192029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "logo"
+    t.string   "phone"
+    t.string   "website"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -31,6 +40,9 @@ ActiveRecord::Schema.define(version: 20170927175004) do
     t.string   "name"
     t.integer  "role"
     t.string   "profile_image"
+    t.integer  "company_id"
+    t.string   "user_type"
+    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -48,4 +60,5 @@ ActiveRecord::Schema.define(version: 20170927175004) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "users", "companies"
 end

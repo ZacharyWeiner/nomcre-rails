@@ -3,7 +3,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   validates :name, presence: true
   validates :email, uniqueness: true, email: true
-
+  belongs_to :company, optional: true
+  accepts_nested_attributes_for :company
   mount_uploader :profile_image, ImageUploader
 
   def set_default_role

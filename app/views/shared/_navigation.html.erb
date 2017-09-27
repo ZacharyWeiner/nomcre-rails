@@ -6,7 +6,7 @@
         <li> <%= link_to t('navigation.root'), root_path %> </li>
         <li> <%= link_to "Login", new_user_session_path %> </li>
         <li> <%= link_to "Logout", destroy_user_session_path,  method: :delete %> </li>
-        <li> <%= link_to "Register", new_user_registration_path %> </li>
+        <li> <%= link_to "Register Company", new_user_registration_path(user_type: 'company') %> </li>
         <li> <%= link_to "Join Waitlist", new_waitlist_path %> </li>
         <li> <%= link_to t('navigation.admin'), admin_root_path %> </li>
       </ul>

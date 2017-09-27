@@ -4,12 +4,12 @@
   <%= devise_error_messages! %>
 
   <div class="form-group has-feedback">
-    <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Name' %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Your Name' %>
     <span class='glyphicon glyphicon-user form-control-feedback'></span>
   </div>
 
   <div class="form-group has-feedback">
-    <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: 'Email' %>
+    <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: 'Your Email' %>
     <span class='glyphicon glyphicon-envelope form-control-feedback'></span>
   </div>
 
@@ -22,6 +22,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Password Confirmation' %>
     <span class='glyphicon glyphicon-lock form-control-feedback'></span>
   </div>
+  <%= request.query_parameters[:user_type] %>
+  <% session[:user_type] = request.query_parameters[:user_type] %>
 
   <div class="row">
     <div class="col-xs-4">

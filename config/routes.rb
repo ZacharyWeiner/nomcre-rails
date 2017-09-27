@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :companies
   resources :waitlists
   # Back admin routes start
   namespace :admin do
