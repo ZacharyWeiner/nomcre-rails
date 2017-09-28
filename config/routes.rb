@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :schedule_items
   resources :companies
   resources :waitlists
   # Back admin routes start

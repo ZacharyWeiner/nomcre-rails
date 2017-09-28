@@ -1,0 +1,35 @@
+<%= link_to 'Add Travel Plan', new_schedule_item_path, class: 'btn btn-primary pull-right' %>
+<ul class="timeline">
+  <% @schedule_items.each do |schedule_item| %>
+    <!-- timeline time label -->
+    <li class="time-label">
+        <span class="bg-green">
+            <%= schedule_item.start_date %>
+        </span>
+    </li>
+    <!-- /.timeline-label -->
+
+    <!-- timeline item -->
+    <li>
+        <!-- timeline icon -->
+        <i class="fa fa-plane bg-blue"></i>
+        <div class="timeline-item">
+            <span class="time"><span>Departure</span> <i class="fa fa-calendar"></i> <%= schedule_item.end_date %></span>
+
+            <h3 class="timeline-header"><%= schedule_item.location %></h3>
+
+            <div class="timeline-body">
+              <%= schedule_item.notes %>
+            </div>
+
+            <div class="timeline-footer">
+              <% if current_user == schedule_item.user %>
+                <%= link_to 'Edit', edit_schedule_item_path(schedule_item), class: 'btn btn-warning' %>
+                <%= link_to 'Destroy', schedule_item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-right' %>
+              <% end %>
+            </div>
+        </div>
+    </li>
+    <!-- END timeline item -->
+  <% end %>
+</ul>

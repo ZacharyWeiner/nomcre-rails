@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, email: true
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company
+  has_many :schedule_items
   mount_uploader :profile_image, ImageUploader
 
   def set_default_role
