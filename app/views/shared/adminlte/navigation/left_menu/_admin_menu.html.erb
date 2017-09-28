@@ -1,0 +1,15 @@
+<li class="header"><%= t('admin.sidebar.administration') %></li>
+<li> <%= link_to '<i class="fa fa-list-ol"></i><span>Waitlist</span>'.html_safe, waitlists_path %> </li>
+<li class="treeview">
+  <a href="#">
+    <i class="fa fa-users"></i>
+    <span>Users</span>
+    <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+    </span>
+  </a>
+  <ul class="treeview-menu">
+    <li> <%= link_to '<i class="fa fa-circle-o"></i> List Users'.html_safe, admin_users_path %> </li>
+    <li> <%= link_to '<i class="fa fa-circle-o"></i> Create User'.html_safe, new_admin_user_path %> </li>
+  </ul>
+</li>
