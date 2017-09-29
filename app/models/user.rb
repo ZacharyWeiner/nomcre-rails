@@ -6,6 +6,7 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company
   has_many :schedule_items
+  has_many :tasks
   mount_uploader :profile_image, ImageUploader
 
   def set_default_role
