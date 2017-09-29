@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :proposals
   mount ActionCable.server => '/cable'
   resources :collections do
     resources :collection_items

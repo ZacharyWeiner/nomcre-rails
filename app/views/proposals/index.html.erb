@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Proposals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Deadline</th>
+      <th>Price</th>
+      <th>Accepted</th>
+      <th>Company</th>
+      <th>Proposal type</th>
+      <th>Completed</th>
+      <th>Completed on</th>
+      <th>Paid</th>
+      <th>Charge</th>
+      <th>Bts</th>
+      <th>Focus points</th>
+      <th>Time of day</th>
+      <th>Location</th>
+      <th>Background</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.title %></td>
+        <td><%= proposal.content %></td>
+        <td><%= proposal.deadline %></td>
+        <td><%= proposal.price %></td>
+        <td><%= proposal.accepted %></td>
+        <td><%= proposal.company %></td>
+        <td><%= proposal.proposal_type %></td>
+        <td><%= proposal.completed %></td>
+        <td><%= proposal.completed_on %></td>
+        <td><%= proposal.paid %></td>
+        <td><%= proposal.charge_id %></td>
+        <td><%= proposal.bts %></td>
+        <td><%= proposal.focus_points %></td>
+        <td><%= proposal.time_of_day %></td>
+        <td><%= proposal.location %></td>
+        <td><%= proposal.background %></td>
+        <td><%= link_to 'Show', proposal %></td>
+        <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
+        <td><%= link_to 'Destroy', proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proposal', new_proposal_path %>

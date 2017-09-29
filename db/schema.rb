@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929175854) do
+ActiveRecord::Schema.define(version: 20170929223827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,30 @@ ActiveRecord::Schema.define(version: 20170929175854) do
     t.text     "content"
     t.index ["chatroom_id"], name: "index_messages_on_chatroom_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
+  create_table "proposals", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.date     "deadline"
+    t.integer  "price"
+    t.boolean  "accepted"
+    t.integer  "company_id"
+    t.string   "proposal_type"
+    t.boolean  "completed"
+    t.date     "completed_on"
+    t.boolean  "paid"
+    t.string   "charge_id"
+    t.text     "bts",           default: [],              array: true
+    t.text     "focus_points",  default: [],              array: true
+    t.string   "time_of_day"
+    t.string   "location"
+    t.string   "background"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id"
+    t.index ["company_id"], name: "index_proposals_on_company_id", using: :btree
+    t.index ["user_id"], name: "index_proposals_on_user_id", using: :btree
   end
 
   create_table "schedule_items", force: :cascade do |t|
@@ -120,6 +144,8 @@ ActiveRecord::Schema.define(version: 20170929175854) do
   add_foreign_key "collections", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "proposals", "companies"
+  add_foreign_key "proposals", "users"
   add_foreign_key "schedule_items", "users"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "companies"
