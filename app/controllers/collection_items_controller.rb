@@ -1,6 +1,7 @@
 class CollectionItemsController < ApplicationController
   before_action :set_collection_item, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_collection
+  layout 'adminlte'
   # GET /collection_items
   # GET /collection_items.json
   def index
@@ -28,7 +29,7 @@ class CollectionItemsController < ApplicationController
 
     respond_to do |format|
       if @collection_item.save
-        format.html { redirect_to @collection_item, notice: 'Collection item was successfully created.' }
+        format.html { redirect_to @collection, notice: 'Collection item was successfully created.' }
         format.json { render :show, status: :created, location: @collection_item }
       else
         format.html { render :new }
@@ -65,6 +66,12 @@ class CollectionItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_collection_item
       @collection_item = CollectionItem.find(params[:id])
+    end
+
+    def set_collection
+      unless params[:collection_id].nil?
+        @collection = Collection.find(params[:collection_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

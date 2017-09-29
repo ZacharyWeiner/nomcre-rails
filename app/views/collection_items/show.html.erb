@@ -1,19 +1,10 @@
-<p id="notice"><%= notice %></p>
+<%= link_to '<Back', collection_path(@collection_item.collection) %>
+<p class='text-center'>
+  <strong><%= @collection_item.collection.title %></strong>
 
-<p>
-  <strong>User:</strong>
-  <%= @collection_item.user %>
 </p>
 
-<p>
-  <strong>Collection:</strong>
-  <%= @collection_item.collection %>
-</p>
+<%= image_tag @collection_item.file, class: "img-responsive" %>
 
-<p>
-  <strong>File:</strong>
-  <%= @collection_item.file %>
-</p>
 
-<%= link_to 'Edit', edit_collection_item_path(@collection_item) %> |
-<%= link_to 'Back', collection_items_path %>
+

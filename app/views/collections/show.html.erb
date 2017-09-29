@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @collection.user %>
-</p>
-
 <p>
   <strong>Title:</strong>
   <%= @collection.title %>
 </p>
-
+<div class='row'>
+  <% @collection.collection_items.each do |item| %>
+    <div class='col-md-3'>
+      <%= link_to collection_collection_item_path(@collection, item) do %>
+        <%= image_tag item.file, style: 'max-height:300px;max-width:200px' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <%= link_to 'Edit', edit_collection_path(@collection) %> |
 <%= link_to 'Back', collections_path %>

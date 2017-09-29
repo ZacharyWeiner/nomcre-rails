@@ -1,10 +1,10 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
-
+  layout 'adminlte'
   # GET /collections
   # GET /collections.json
   def index
-    @collections = Collection.all
+    @collections = Collection.where(user: current_user)
   end
 
   # GET /collections/1
