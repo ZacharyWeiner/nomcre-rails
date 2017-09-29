@@ -11,8 +11,9 @@ class ApplicationController < ActionController::Base
 
   protected
   def force_set_company
-    unless current_user.nil?
-      unless request.path.include?('companies') || request.path.include?('session')
+    unless current_user.nil? || request.path.include?('session')
+      byebug
+      unless request.path.include?('companies')
         if (session[:user_type] == "company") || (current_user.user_type == 'company' && current_user.company.nil?)
           if current_user.user_type.nil? && session[:user_type].nil? == false
             current_user.user_type = session[:user_type]
