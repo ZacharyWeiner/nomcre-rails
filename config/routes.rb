@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :collections do
     resources :collection_items
   end
+  get '/collection_item/download/:id', to: 'collection_items#download', as:'download'
   resources :chatrooms
   resources :messages
   resources :tasks

@@ -62,6 +62,12 @@ class CollectionItemsController < ApplicationController
     end
   end
 
+  def download
+    set_collection_item
+    data = open(@collection_item.file.url)
+    send_data data.read, filename: @collection_item.file.instance_variable_get('@file').filename,  disposition: 'attach', stream: 'true', buffer_size: '4096'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_collection_item
