@@ -23,6 +23,7 @@ gem 'friendly_id'
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-aws'
 gem 'kaminari'
+gem 'redis', '~> 3.0'
 
 # Only Development env gems
 group :development do

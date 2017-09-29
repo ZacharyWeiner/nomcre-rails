@@ -7,6 +7,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :company
   has_many :schedule_items
   has_many :tasks
+  has_many :messages
+  has_many :chatrooms, through: :messages
   mount_uploader :profile_image, ImageUploader
 
   def set_default_role

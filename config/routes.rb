@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   resources :collections do
     resources :collection_items
   end
+  resources :chatrooms
+  resources :messages
   resources :tasks
   resources :schedule_items
   resources :companies
