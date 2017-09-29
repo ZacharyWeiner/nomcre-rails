@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :collections do
+    resources :collection_items
+  end
   resources :tasks
   resources :schedule_items
   resources :companies

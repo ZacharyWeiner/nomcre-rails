@@ -1,0 +1,24 @@
+<%= form_for(collection_item) do |f| %>
+  <% if collection_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(collection_item.errors.count, "error") %> prohibited this collection_item from being saved:</h2>
+
+      <ul>
+      <% collection_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :file %>
+    <%= f.text_field :file %>
+  </div>
+
+  <%= f.hidden_field :collection_id, :value => params[:id]%>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

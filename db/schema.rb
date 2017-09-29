@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929154011) do
+ActiveRecord::Schema.define(version: 20170929165007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collection_items", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "collection_id"
+    t.string   "file"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["collection_id"], name: "index_collection_items_on_collection_id", using: :btree
+    t.index ["user_id"], name: "index_collection_items_on_user_id", using: :btree
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +99,9 @@ ActiveRecord::Schema.define(version: 20170929154011) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "collection_items", "collections"
+  add_foreign_key "collection_items", "users"
+  add_foreign_key "collections", "users"
   add_foreign_key "schedule_items", "users"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "companies"
