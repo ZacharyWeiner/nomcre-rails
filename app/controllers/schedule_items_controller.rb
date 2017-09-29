@@ -28,7 +28,7 @@ class ScheduleItemsController < ApplicationController
     @schedule_item.user = current_user
     respond_to do |format|
       if @schedule_item.save
-        format.html { redirect_to @schedule_item, notice: 'Schedule item was successfully created.' }
+        format.html { redirect_to schedule_items_path, notice: 'Schedule item was successfully created.' }
         format.json { render :show, status: :created, location: @schedule_item }
       else
         format.html { render :new }
