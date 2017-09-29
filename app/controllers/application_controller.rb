@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :force_set_company
 
   def home
+    if session[:user_type] == 'creative'
+      current_user.user_type = 'creative'
+      current_user.save
+      session[:user_type] == nil
+    end
     unless current_user.nil?
       redirect_to adminlte_path
     end
