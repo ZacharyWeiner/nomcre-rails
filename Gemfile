@@ -24,6 +24,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-aws'
 gem 'kaminari'
 gem 'redis', '~> 3.0'
+gem 'stripe'
 
 # Only Development env gems
 group :development do

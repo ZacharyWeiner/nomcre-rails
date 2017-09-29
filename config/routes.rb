@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
 
   get 'adminlte', to:'pages#adminlte'
-
+  resources :charges
   # Application root
   root to: 'application#home'
   # Front routes end
