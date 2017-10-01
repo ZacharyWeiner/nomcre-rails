@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929223827) do
+ActiveRecord::Schema.define(version: 20170930163035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,17 @@ ActiveRecord::Schema.define(version: 20170929223827) do
     t.date     "completed_on"
     t.boolean  "paid"
     t.string   "charge_id"
-    t.text     "bts",           default: [],              array: true
-    t.text     "focus_points",  default: [],              array: true
+    t.text     "bts",             default: [],              array: true
+    t.text     "focus_points",    default: [],              array: true
     t.string   "time_of_day"
     t.string   "location"
     t.string   "background"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
+    t.string   "deposit_id"
+    t.boolean  "deposit_paid"
+    t.date     "deposit_paid_on"
     t.index ["company_id"], name: "index_proposals_on_company_id", using: :btree
     t.index ["user_id"], name: "index_proposals_on_user_id", using: :btree
   end

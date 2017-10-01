@@ -17,10 +17,27 @@
       <li class="list-group-item">
         <b>Complete</b> <a class="pull-right"><%= @proposal.completed? %></a>
       </li>
+      <li class="list-group-item">
+        <b>Assigned To</b> <a class="pull-right"><%= @proposal.user.email unless @proposal.user.nil? %></a>
+      </li>
     </ul>
 
     <% if current_user.company ==  @proposal.company %>
       <%= link_to 'Edit', edit_proposal_path(@proposal), class: "btn btn-primary btn-block" %>
+    <% end %>
+    <% if  @proposal.deposit_paid == true %>
+      <%= link_to 'Deposit Paid', "#", class: "btn btn-success btn-block disabled" %>
+    <% else %>
+      <%= link_to 'Pay Depost', "#", class: "btn btn-warning btn-block" %>
+    <% end %>
+     <% if  @proposal.paid == true %>
+      <%= link_to 'Paid', "#", class: "btn btn-success btn-block disabled" %>
+    <% else %>
+      <% if @proposal.deposit_paid == true %>
+        <%= link_to 'Pay', "#", class: "btn btn-warning btn-block" %>
+      <% else %>
+        <%= link_to 'Deposit Required First', "#", class: "btn btn-warning btn-block disabled" %>
+      <% end %>
     <% end %>
   </div>
   <!-- /.box-body -->

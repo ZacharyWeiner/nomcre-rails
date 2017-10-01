@@ -1,0 +1,142 @@
+<%= form_for(@proposal) do |f| %>
+  <% if @proposal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proposal.errors.count, "error") %> prohibited this proposal from being saved:</h2>
+
+      <ul>
+      <% @proposal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class="panel box box-primary">
+        <div class="box-header with-border">
+          <h4 class="box-title">Behind The Scenes</h4>
+        </div>
+        <div class="box-body">
+          <%= check_box_tag 'proposal[bts][]', 'Photo', checked = @proposal.bts.include?("Photo") %>
+          <%= f.label :photo %>
+          <%= check_box_tag 'proposal[bts][]', 'Video', checked = @proposal.bts.include?("Video") %>
+          <%= f.label :video %>
+        </div>
+      </div>
+      <div class="panel box box-primary">
+        <div class="box-header with-border">
+          <h4 class="box-title">Background</h4>
+        </div>
+        <div class="box-body">
+          <div class='row'>
+            <div class='col-md-6'>
+              <ul>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Beach', checked = (@proposal.background =="Beach") %>
+                  <%= f.label :beach %>
+                </li>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Mountains', checked = (@proposal.background =="Mountains") %>
+                  <%= f.label :mountains %>
+                </li>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'City Scape', checked = (@proposal.background =="City Scape") %>
+                  <%= f.label :city_scape %>
+                </li>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Nature/Park', checked = (@proposal.background =="Nature/Park") %>
+                  <%= f.label :nature_or_park %>
+                </li>
+              </ul>
+            </div>
+            <div class='col-md-6'>
+              <ul>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Historical Building', checked = (@proposal.background =="Historical Building") %>
+                  <%= f.label :historical_building %>
+                </li>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Building Interior', checked = (@proposal.background =="Building Interior") %>
+                  <%= f.label :building_interior %>
+                </li>
+                <li>
+                  <%= radio_button_tag 'proposal[background]', 'Action/Activity', checked = (@proposal.background =="Action/Activity") %>
+                  <%= f.label :action_or_activity %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div class="panel box box-primary">
+        <div class="box-header with-border">
+          <h4 class="box-title">Focus Points (3 max)</h4>
+        </div>
+        <div class="box-body">
+          <div class='row'>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Top Left', checked = @proposal.focus_points.include?("Top Left") %>
+              <%= f.label :top_left %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Top Center', checked = @proposal.focus_points.include?("Top Center") %>
+              <%= f.label :top_center %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Top Right', checked = @proposal.focus_points.include?("Top Right") %>
+              <%= f.label :top_right %>
+            </div>
+
+            <!-- Middle -->
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Middle Left', checked = @proposal.focus_points.include?("Middle Left") %>
+              <%= f.label :middle_left %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Middle Center', checked = @proposal.focus_points.include?("Middle Center") %>
+              <%= f.label :middle_center %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Middle Right', checked = @proposal.focus_points.include?("Middle Right") %>
+              <%= f.label :middle_right %>
+            </div>
+            <!-- Botom -->
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Bottom Left', checked = @proposal.focus_points.include?("Bottom Left") %>
+              <%= f.label :bottom_left %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Bottom Middle', checked = @proposal.focus_points.include?("Bottom Middle") %>
+              <%= f.label :bottom_center %>
+            </div>
+            <div class='col-md-4'>
+              <%= check_box_tag 'proposal[focus_points][]', 'Bottom Right', checked = @proposal.focus_points.include?("Bottom Right") %>
+              <%= f.label :bottom_right %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel box box-primary">
+        <div class="box-header with-border">
+          <h4 class="box-title">Time Of Day</h4>
+        </div>
+        <div class="box-body">
+          <%= radio_button_tag 'proposal[time_of_day]', 'Sunrise', checked = (@proposal.time_of_day =="Sunrise") %>
+          <%= f.label :sunrise %>
+          <%= radio_button_tag 'proposal[time_of_day]', 'Sunset', checked = (@proposal.time_of_day =="Sunset") %>
+          <%= f.label :sunset %>
+          <%= radio_button_tag 'proposal[time_of_day]', 'Daylight', checked = (@proposal.time_of_day =="Daylight") %>
+          <%= f.label :daylight %>
+          <%= radio_button_tag 'proposal[time_of_day]', 'Dusk', checked = (@proposal.time_of_day =="Dusk") %>
+          <%= f.label :dusk %>
+          <%= radio_button_tag 'proposal[time_of_day]', 'Night', checked = (@proposal.time_of_day =="Night") %>
+          <%= f.label :night %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= f.submit %>
+<% end %>
+

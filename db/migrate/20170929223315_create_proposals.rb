@@ -14,6 +14,7 @@ class CreateProposals < ActiveRecord::Migration[5.0]
       t.string :charge_id
       t.text :bts, array: true, default: []
       t.text :focus_points, array: true, default: []
+      t.text :add_ons, array: true, default: []
       t.string :time_of_day
       t.string :location
       t.string :background

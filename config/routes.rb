@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :proposals
+
   mount ActionCable.server => '/cable'
   resources :collections do
     resources :collection_items
@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :schedule_items
   resources :companies
   resources :waitlists
+
+ resources :proposals do
+  get '/edit_details', to: 'proposals#edit_details', as: 'edit_details'
+ end
+
   # Back admin routes start
   namespace :admin do
     resources :users

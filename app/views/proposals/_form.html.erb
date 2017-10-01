@@ -27,14 +27,14 @@
   </div>
 
   <div class="form-group">
-    <%= radio_button_tag(:proposal_type, "photo") %>
-    <%= label_tag(:proposal_type_photo, "Photo") %>
-    <%= radio_button_tag(:proposal_type, "video") %>
-    <%= label_tag(:proposal_type_video, "Video") %>
-    <%= radio_button_tag(:proposal_type, "drone") %>
-    <%= label_tag(:proposal_type_drone, "Drone") %>
-    <%= radio_button_tag(:proposal_type, "custom") %>
-    <%= label_tag(:proposal_type_custom, "Custom") %>
+    <%= f.radio_button(:proposal_type, "photo") %>
+    <%= f.label(:proposal_type_photo, "Photo") %>
+    <%= f.radio_button(:proposal_type, "video") %>
+    <%= f.label(:proposal_type_video, "Video") %>
+    <%= f.radio_button(:proposal_type, "drone") %>
+    <%= f.label(:proposal_type_drone, "Drone") %>
+    <%= f.radio_button(:proposal_type, "custom") %>
+    <%= f.label(:proposal_type_custom, "Custom") %>
   </div>
 
   <div class="form-group">
