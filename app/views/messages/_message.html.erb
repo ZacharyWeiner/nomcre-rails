@@ -4,5 +4,9 @@
   </div>
   <div class='col-md-10'>
     <%= message.content %>
+    <br>
+    <% unless message.file.nil? %>
+      <%= image_tag message.file, class: 'img-responsive'%>
+    <%end %>
   </div>
 </div>

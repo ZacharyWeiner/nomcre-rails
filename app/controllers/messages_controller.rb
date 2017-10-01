@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
           notification.save
         end
       end
+      redirect_to chatroom_path(message.chatroom)
     else
       redirect_to chatrooms_path
     end
@@ -20,6 +21,6 @@ class MessagesController < ApplicationController
   private
 
     def message_params
-      params.require(:message).permit(:content, :chatroom_id)
+      params.require(:message).permit(:content, :chatroom_id, :file)
     end
 end

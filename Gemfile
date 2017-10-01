@@ -25,6 +25,7 @@ gem 'carrierwave-aws'
 gem 'kaminari'
 gem 'redis', '~> 3.0'
 gem 'stripe'
+gem 'auto_html', '~>1.6.4'
 
 # Only Development env gems
 group :development do
