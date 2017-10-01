@@ -1,0 +1,5 @@
+<ul class='list-unstyled'>
+<% current_user.chatrooms.uniq.each do |room| %>
+  <li> <%= link_to room.topic, chatroom_path(room) %> </li>
+<% end %>
+</ul>

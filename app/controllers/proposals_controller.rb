@@ -1,5 +1,5 @@
 class ProposalsController < ApplicationController
-  before_action :set_proposal, only: [:show, :edit, :edit_details, :update, :destroy]
+  before_action :set_proposal, only: [:show, :edit, :edit_details, :payment, :update, :destroy]
   layout 'adminlte'
   # GET /proposals
   # GET /proposals.json
@@ -78,6 +78,9 @@ class ProposalsController < ApplicationController
       format.html { redirect_to proposals_url, notice: 'Proposal was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def payment
   end
 
   private

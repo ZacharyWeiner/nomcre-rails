@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
   layout 'adminlte'
   # GET /tasks
   # GET /tasks.json
@@ -61,10 +61,23 @@ class TasksController < ApplicationController
     end
   end
 
+  def complete
+    @task.completed = true
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to proposal_path(@task.proposal), notice: 'Task was successfully completed.' }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      if params[:task_id].nil?
+        @task = Task.find(params[:id])
+      else
+        @task = Task.find(params[:task_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

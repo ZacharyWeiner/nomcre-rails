@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930163035) do
+ActiveRecord::Schema.define(version: 20171001160808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,10 @@ ActiveRecord::Schema.define(version: 20170930163035) do
     t.boolean  "completed"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "company_id"
+    t.integer  "proposal_id"
+    t.index ["company_id"], name: "index_tasks_on_company_id", using: :btree
+    t.index ["proposal_id"], name: "index_tasks_on_proposal_id", using: :btree
     t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
 
@@ -150,6 +154,8 @@ ActiveRecord::Schema.define(version: 20170930163035) do
   add_foreign_key "proposals", "companies"
   add_foreign_key "proposals", "users"
   add_foreign_key "schedule_items", "users"
+  add_foreign_key "tasks", "companies"
+  add_foreign_key "tasks", "proposals"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "companies"
 end

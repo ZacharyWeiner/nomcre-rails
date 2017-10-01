@@ -1,14 +1,19 @@
-<div class="row col-md-8 col-md-offset-2">
-  <h1><%= @chatroom.topic %></h1>
-
-<div class="" style="max-height:400px; overflow-y: auto">
-  <div class="" id="messages" >
-    <%= render partial: 'messages/message', collection: @chatroom.messages.reverse.take(25) %>
+<div class='row'>
+  <div class='col-md-2'>
+    <%= render 'chatrooms/partials/user_chatroom_list'%>
+  </div>
+  <div class='col-md-10'>
+    <div class="row col-md-8 col-md-offset-2">
+      <h1><%= @chatroom.topic %></h1>
+      <div class="" style="max-height:300px; overflow-y: auto">
+        <div class="" id="messages" >
+          <%= render partial: 'messages/message', collection: @chatroom.messages.reverse.take(25) %>
+        </div>
+      </div>
+      <div>
+        <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
+      </div>
+    </div>
   </div>
 </div>
-<div>
-  <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
-</div>
-</div>
-
 

@@ -28,7 +28,7 @@
     <% if  @proposal.deposit_paid == true %>
       <%= link_to 'Deposit Paid', "#", class: "btn btn-success btn-block disabled" %>
     <% else %>
-      <%= link_to 'Pay Depost', "#", class: "btn btn-warning btn-block" %>
+      <%= link_to 'Pay Depost', proposal_payment_path(@proposal), class: "btn btn-warning btn-block" %>
     <% end %>
      <% if  @proposal.paid == true %>
       <%= link_to 'Paid', "#", class: "btn btn-success btn-block disabled" %>

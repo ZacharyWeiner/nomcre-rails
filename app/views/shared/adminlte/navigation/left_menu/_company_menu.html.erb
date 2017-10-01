@@ -5,6 +5,6 @@
 <li> <%= link_to '<i class="fa fa-tasks"></i><span>Tasks</span>'.html_safe, tasks_path %> </li>
 <li> <%= link_to '<i class="fa fa-check-square-o"></i><span>Completed Work</span>'.html_safe, "#" %> </li>
 <li> <%= link_to '<i class="fa fa-usd"></i><span>Invoices</span>'.html_safe, "#" %> </li>
-<li> <%= link_to '<i class="fa fa-comments"></i><span>Communication</span>'.html_safe, "#" %> </li>
+<li> <%= link_to '<i class="fa fa-comments"></i><span>Communication</span>'.html_safe, chatroom_path(current_user.chatrooms.first) %> </li>
 <li> <%= link_to '<i class="fa fa-phone"></i><span>Contact Us</span>'.html_safe, "#" %> </li>
 
