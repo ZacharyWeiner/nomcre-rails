@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :messages
   has_many :chatrooms, through: :messages
+  has_many :notifications
   mount_uploader :profile_image, ImageUploader
 
   def set_default_role
