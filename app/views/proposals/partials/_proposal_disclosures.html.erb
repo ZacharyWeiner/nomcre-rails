@@ -1,0 +1,12 @@
+<%= form_for(@proposal) do |f| %>
+  <div class="field">
+    <%= f.label :model_release %>
+    <%= f.file_field :model_release %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+
+<% unless @proposal.model_release.nil? %>
+  <%= image_tag @proposal.model_release, class: 'img-responsive'%>
+<% end %>
