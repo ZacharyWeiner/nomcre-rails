@@ -1,6 +1,7 @@
 class ProposalsController < ApplicationController
   before_action :set_proposal, only: [:show, :edit, :edit_details, :payment, :update, :destroy]
   layout 'adminlte'
+
   # GET /proposals
   # GET /proposals.json
   def index
