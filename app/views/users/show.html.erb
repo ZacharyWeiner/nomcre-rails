@@ -15,7 +15,9 @@
       <br>
       <% collection.collection_items.each do |item| %>
         <div class='col-md-4'>
-          <%= image_tag item.file, class: 'img-responsive' %>
+          <%= link_to collection_collection_item_path(item.collection, item) do %>
+            <%= image_tag item.file, class: 'img-responsive' %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
