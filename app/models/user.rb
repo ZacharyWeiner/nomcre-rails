@@ -6,6 +6,7 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company
   has_many :schedule_items
+  has_many :collections
   has_many :tasks
   has_many :messages
   has_many :chatrooms, through: :messages

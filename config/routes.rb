@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   devise_for :users, only: [:session, :registration], path: 'session',
              path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-
+  get 'user/:id', to: "users#show"
   get 'adminlte', to:'pages#adminlte'
   resources :charges
   # Application root
