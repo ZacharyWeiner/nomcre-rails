@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001192816) do
+ActiveRecord::Schema.define(version: 20171002144323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20171001192816) do
     t.string   "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.bigint   "parent_id"
+    t.string   "location_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -84,7 +92,6 @@ ActiveRecord::Schema.define(version: 20171001192816) do
     t.text     "bts",             default: [],              array: true
     t.text     "focus_points",    default: [],              array: true
     t.string   "time_of_day"
-    t.string   "location"
     t.string   "background"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -92,18 +99,22 @@ ActiveRecord::Schema.define(version: 20171001192816) do
     t.string   "deposit_id"
     t.boolean  "deposit_paid"
     t.date     "deposit_paid_on"
+    t.text     "model_release"
+    t.integer  "location_id"
     t.index ["company_id"], name: "index_proposals_on_company_id", using: :btree
+    t.index ["location_id"], name: "index_proposals_on_location_id", using: :btree
     t.index ["user_id"], name: "index_proposals_on_user_id", using: :btree
   end
 
   create_table "schedule_items", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "location"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "notes"
+    t.integer  "location_id"
+    t.index ["location_id"], name: "index_schedule_items_on_location_id", using: :btree
     t.index ["user_id"], name: "index_schedule_items_on_user_id", using: :btree
   end
 
@@ -164,7 +175,9 @@ ActiveRecord::Schema.define(version: 20171001192816) do
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "proposals", "companies"
+  add_foreign_key "proposals", "locations"
   add_foreign_key "proposals", "users"
+  add_foreign_key "schedule_items", "locations"
   add_foreign_key "schedule_items", "users"
   add_foreign_key "tasks", "companies"
   add_foreign_key "tasks", "proposals"

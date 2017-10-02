@@ -1,6 +1,7 @@
 class Proposal < ApplicationRecord
   belongs_to :company
   belongs_to :user, optional: true
+  belongs_to :location
   has_many :tasks
   paginates_per 20
   mount_uploader :model_release, FileUploader

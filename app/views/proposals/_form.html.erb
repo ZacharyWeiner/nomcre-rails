@@ -39,7 +39,7 @@
 
   <div class="form-group">
     <%= f.label :location %>
-    <%= f.text_field :location, class: 'form-control' %>
+    <%= f.collection_select(:location_id, Location.all.order(:name), :id, :name) %>
   </div>
   <%= f.hidden_field :company_id, :value => current_user.company.id %>
   <div class="actions">

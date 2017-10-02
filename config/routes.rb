@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :locations
   mount ActionCable.server => '/cable'
   resources :collections do
     resources :collection_items

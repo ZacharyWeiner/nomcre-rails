@@ -17,7 +17,7 @@
         <div class="timeline-item">
             <span class="time"><span>Departure</span> <i class="fa fa-calendar"></i> <%= schedule_item.end_date %></span>
 
-            <h3 class="timeline-header"><%= schedule_item.location %></h3>
+            <h3 class="timeline-header"><%= schedule_item.location.name unless schedule_item.location.nil? %></h3>
 
             <div class="timeline-body">
               <%= schedule_item.notes %>
