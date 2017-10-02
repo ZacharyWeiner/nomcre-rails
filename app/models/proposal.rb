@@ -3,7 +3,7 @@ class Proposal < ApplicationRecord
   belongs_to :user, optional: true
   has_many :tasks
   paginates_per 20
-  mount_uploader :model_release, DisclosureUploader
+  mount_uploader :model_release, FileUploader
 
   def create_tasks
     if self.proposal_type = "Photo"
