@@ -5,8 +5,8 @@ class ProposalsController < ApplicationController
   # GET /proposals
   # GET /proposals.json
   def index
-    if current_user.company.nil?
-      @proposals = Proposal.where(user: current_user).order(:created_at).page params[:page]
+    if current_user.user_type == 'creative'
+      @proposals = Proposal.where(user: current_user).where(completed: nil).order(:created_at).page params[:page]
     else
       @proposals = Proposal.where(company: current_user.company).order(:created_at).page params[:page]
     end
@@ -84,16 +84,42 @@ class ProposalsController < ApplicationController
   def payment
   end
 
+  def requests
+    if current_user.user_type == 'creative'
+      @requests = ProposalRequest.where(requested: current_user.id)
+    end
+  end
+
   def create_request
     @proposal = Proposal.find(params[:proposal_id])
-    @proposal_request = ProposalRequest.create(requested_by: current_user.id, requested: User.find(params[:user_id]).id, proposal_id: @proposal.id )
+    @proposal_request = ProposalRequest.where(requested: User.find(params[:user_id]).id, proposal_id: @proposal.id ).first
+    if @proposal_request.nil?
+      @proposal_request = ProposalRequest.create(requested_by: current_user.id, requested: User.find(params[:user_id]).id, proposal_id: @proposal.id )
+    end
     redirect_to @proposal
   end
 
   def accept_request
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal_request = ProposalRequest.where(requested: current_user.id, proposal_id: @proposal.id ).first
+    @proposal_request.accepted = true
+    @proposal_request.save
+    redirect_to proposal_requests_path
   end
 
   def approve_request
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal_request = ProposalRequest.where(requested_by: current_user.id, proposal_id: @proposal.id, accepted: true).first
+    @proposal_request.approved = true
+    @proposal_request.save
+    @proposal.accepted = true
+    @proposal.user = User.find(@proposal_request.requested)
+    @proposal.save
+    @proposal.tasks.each do |task|
+      task.user_id = @proposal_request.requested
+      task.save
+    end
+    redirect_to @proposal
   end
 
   private

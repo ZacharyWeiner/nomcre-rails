@@ -1,0 +1,46 @@
+<section class="content">
+  <div class="row">
+    <div class="col-md-3">
+
+      <!-- Profile Image -->
+      <%= render 'proposals/partials/proposal_info_top_creative' %>
+      <!-- /.box -->
+
+      <!-- About Me Box -->
+      <%= render 'proposals/partials/proposal_info_bottom' %>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#basic_info" data-toggle="tab">Basic Info</a></li>
+          <li><a href="#details" data-toggle="tab">Details</a></li>
+          <li><a href="#tasks" data-toggle="tab">Tasks</a></li>
+          <li><a href="#disclosures" data-toggle="tab">Disclosures</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="active tab-pane" id="basic_info">
+            <%= render 'proposals/partials/proposal_basic_info'%>
+          </div>
+          <div class="tab-pane" id="details">
+            <%= render 'proposals/partials/proposal_details'%>
+          </div>
+          <div class="tab-pane" id="tasks">
+            <%= render 'proposals/partials/proposal_tasks_list'%>
+          </div>
+          <div class="tab-pane" id="disclosures">
+            <%= render 'proposals/partials/proposal_disclosures' %>
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+
+

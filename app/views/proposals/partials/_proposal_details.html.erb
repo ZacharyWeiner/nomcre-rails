@@ -40,7 +40,7 @@
     </div>
   </div>
   <% if current_user.company == @proposal.company %>
-      <%= link_to "Edit", proposal_edit_details_path(@proposal), class: 'pull-right' %>
+      <%= link_to "Edit", proposal_edit_details_path(@proposal), class: 'pull-right' unless  @proposal.company.users.include?(current_user) == false %>
     <% end %>
 </div>
 

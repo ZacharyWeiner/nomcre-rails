@@ -1,0 +1,13 @@
+<% current_user.proposal_requests.each do |pr| %>
+  <div class='row'>
+    <div class='col-md-3'>
+      <%= pr.proposal.title %> <br>
+      <%= pr.proposal.company.name %>
+    </div>
+    <div class='col-md-3'>
+      <%= pr.proposal.deadline %>
+    </div>
+    <div class='col-md-3'> <%= pr.proposal.location.name %></div>
+    <div class='col-md-3'> <%= link_to "Show", pr.proposal, class: 'btn btn-primary'%> </div>
+  </div>
+<% end %>

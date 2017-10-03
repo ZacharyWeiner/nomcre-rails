@@ -7,16 +7,7 @@
     <div class='col-md-3'><%= sr.schedule_item.end_date %></div>
     <div class='col-md-3'><%= link_to "See Portfolio", user_show_path(sr.user), class: 'btn btn-primary' %></div>
     <div class='col-md-3'>
-      <% if @proposal.deposit_paid %>
-        <% if @proposal.proposal_requests.where(requested: sr.user.id).count == 0%>
-          <%= link_to "Request Creative", proposal_create_request_path(@proposal, sr.user), class: 'btn btn-primary' %>
-        <% else %>
-          <%= link_to "Creative Requested", proposal_create_request_path(@proposal, sr.user), class: 'btn btn-warning disabled' %>
-        <% end %>
-      <% else %>
-        <%= link_to "Request Creative", proposal_create_request_path(@proposal, sr.user), class: 'btn btn-primary disabled' %>
-        <br>
-      <% end %>
+      <%= render :partial => 'proposals/partials/search_results/request_buttons', :locals => {:sr => sr}%>
     </div>
   </div>
   <div class='row'>
@@ -27,3 +18,5 @@
     <% end %>
   </div>
 <% end %>
+
+

@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   get '/payment', to: 'proposals#payment'
   get 'create_request/:user_id', to: 'proposals#create_request', as: 'create_request'
   get 'accept_request', to: 'proposals#accept_request'
-  get 'approve_request', to: 'proposals#create_request'
+  get 'approve_request', to: 'proposals#approve_request'
  end
-
+ get 'requests', to: 'proposal_requests#requests', as:'proposal_requests'
   # Back admin routes start
   namespace :admin do
     resources :users

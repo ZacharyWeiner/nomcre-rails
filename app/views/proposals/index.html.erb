@@ -46,7 +46,7 @@
             <td><%= proposal.proposal_type %></td>
             <td><%= proposal.paid %></td>
             <td><%= link_to 'Show', proposal, class: 'btn btn-primary' %></td>
-            <td><%= link_to 'Delete', proposal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+            <td><%= link_to 'Delete', proposal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' unless proposal.company.users.include?(current_user) == false %></td>
           </tr>
         <% end %>
       </tbody>

@@ -19,8 +19,18 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
+  def has_request(proposal_id)
+    ProposalRequest.where(requested: self.id, proposal_id: proposal_id).count > 0
+  end
+
+  def get_proposal_request(proposal_id)
+    ProposalRequest.where(requested: self.id, proposal_id: proposal_id).first
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
 end

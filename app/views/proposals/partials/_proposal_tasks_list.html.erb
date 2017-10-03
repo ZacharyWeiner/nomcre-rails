@@ -2,15 +2,19 @@
 <% @proposal.tasks.each do |task| %>
   <li>
     <div class='row'>
-      <div class='col-md-4'><%= task.deadline%></div>
       <div class='col-md-4'><%= task.description%></div>
+      <div class='col-md-4'><%= task.deadline%></div>
       <div class='col-md-4'>
-        <% if task.completed? %>
-          <%= link_to "Complete", task_task_complete_path(task), class: 'btn btn-warning disabled btn-block'  %>
-        <% else %>
-          <%= link_to "Mark Complete", task_task_complete_path(task), class: 'btn btn-primary btn-block'  %>
+        <% if  @proposal.company.users.include?(current_user) %>
+          <% if task.completed? %>
+            <%= link_to "Complete", task_task_complete_path(task), class: 'btn btn-warning disabled btn-block'  %>
+          <% else %>
+            <%= link_to "Mark Complete", task_task_complete_path(task), class: 'btn btn-primary btn-block'  %>
+          <% end %>
         <% end %>
-        </div>
+
+        <%= link_to "View", task %>
+      </div>
     </div>
   </li>
 <% end %>

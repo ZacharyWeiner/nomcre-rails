@@ -1,0 +1,47 @@
+<ul class="timeline">
+  <% @requests.each do |pr| %>
+    <!-- timeline time label -->
+    <li class="time-label">
+        <span class="bg-green">
+            <%= pr.proposal.deadline %>
+        </span>
+    </li>
+    <!-- /.timeline-label -->
+
+    <!-- timeline item -->
+    <li>
+        <!-- timeline icon -->
+        <i class="fa fa-briefcase bg-blue"></i>
+        <div class="timeline-item">
+            <span class="time"><span>Requested On:</span> <i class="fa fa-calendar"></i> <%= pr.created_at %></span>
+            <div style='padding:24px'
+            <h3 class="timeline-header"><%= pr.proposal.title %></h3>
+
+            <div class="timeline-body">
+              <div class='row'>
+                <h4><%= pr.proposal.company.name %></h4>
+                <br>
+                <h5><%= pr.proposal.location.name %></h5>
+                <div class='row'>
+                   <div class='col-md-4'>
+                    <strong>Proposal Type:</strong> <%= pr.proposal.proposal_type unless pr.proposal.time_of_day.nil? %>
+                  </div>
+                  <div class='col-md-4'><strong>Time Of Day:</strong> <%= pr.proposal.time_of_day unless pr.proposal.time_of_day.nil? %></div>
+                  <div class='col-md-4'><strong>Background:</strong> <%= pr.proposal.background unless pr.proposal.background.nil? %></div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="timeline-footer">
+              <%= link_to "View", pr.proposal, class: 'btn btn-primary '%>
+              <% if pr.accepted == true %>
+                <%= link_to "Accepted", proposal_accept_request_path(pr.proposal), class: 'btn btn-success disabled'%>
+              <% else %>
+                <%= link_to "Accept", proposal_accept_request_path(pr.proposal), class: 'btn btn-success '%>
+              <% end %>
+            </div>
+        </div>
+    </li>
+    <!-- END timeline item -->
+  <% end %>
+</ul>

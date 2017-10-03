@@ -2,8 +2,14 @@
 <!-- /.box-header -->
 <div class="box-body">
   <div class='row'>
-      <strong>Production Type </strong>
-      <%= @proposal.proposal_type%>
+    <dl style="padding:12px">
+      <dt>
+        Production Type
+      </dt>
+      <dd>
+        <%= @proposal.proposal_type%>
+      </dd>
+    </dl>
   </div>
   <hr/>
   <dl>
@@ -13,6 +19,6 @@
 </div>
 <!-- /.box-body -->
 <div class="pull-right">
-  <%= link_to "Edit", edit_proposal_path(@proposal) %>
+  <%= link_to "Edit", edit_proposal_path(@proposal) unless  @proposal.company.users.include?(current_user) == false %>
 </div>
 </div>
