@@ -18,6 +18,9 @@ Rails.application.routes.draw do
  resources :proposals do
   get '/edit_details', to: 'proposals#edit_details', as: 'edit_details'
   get '/payment', to: 'proposals#payment'
+  get 'create_request/:user_id', to: 'proposals#create_request', as: 'create_request'
+  get 'accept_request', to: 'proposals#accept_request'
+  get 'approve_request', to: 'proposals#create_request'
  end
 
   # Back admin routes start
@@ -33,9 +36,11 @@ Rails.application.routes.draw do
   devise_for :users, only: [:session, :registration], path: 'session',
              path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  get 'user/:id', to: "users#show"
+  get 'user/:id', to: "users#show", as: 'user_show'
   get 'adminlte', to:'pages#adminlte'
   resources :charges
+  post 'charges/deposit/:proposal_id', to: 'charges#proposal_deposit', as: 'proposal_deposit'
+  post 'charges/balance/:proposal_id', to: 'charges#proposal_balance', as: 'proposal_balance'
   # Application root
   root to: 'application#home'
   # Front routes end

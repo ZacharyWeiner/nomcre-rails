@@ -63,7 +63,7 @@
               <td><%= @proposal.deadline %></td>
               <td><%= @proposal.proposal_type %></td>
               <td><%= @proposal.location.name %></td>
-              <td><%= @proposal.price * 0.01 %></td>
+              <td>$<%= @proposal.price * 0.99 %> USD</td>
             </tr>
             </tbody>
           </table>
@@ -90,13 +90,13 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
-          <p class="lead">Amount Due 2/22/2014</p>
+          <p class="lead"><%= Date.today %></p>
 
           <div class="table-responsive">
             <table class="table">
               <tbody><tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>$<%= @proposal.price * 0.01 %></td>
+                <td>$<%= @proposal.price * 0.99 %> USD</td>
               </tr>
             </tbody></table>
           </div>
@@ -112,8 +112,8 @@
           <!-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button> -->
           <div class='pull-right'>
-            <% if @proposal.deposit_paid == false || @proposal.deposit_paid == nil%>
-              <%= form_tag proposal_deposit_path(@proposal) do %>
+            <% if @proposal.paid == false || @proposal.paid == nil%>
+              <%= form_tag proposal_balance_path(@proposal) do %>
                 <article>
                   <% if flash[:error].present? %>
                   <div id="error_explanation">
@@ -121,7 +121,7 @@
                   </div>
                   <% end %>
                 </article>
-                <% @stripe_price = @proposal.price%>
+                <% @stripe_price = ((@proposal.price - (@proposal.price * 0.01)) * 100)%>
                 <form action="/charge" method="POST">
                   <%= hidden_field_tag 'proposal_id', @proposal.id %>
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button pull-right"
@@ -142,3 +142,4 @@
         </div>
       </div>
     </section>
+

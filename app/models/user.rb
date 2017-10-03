@@ -7,6 +7,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :company
   has_many :schedule_items
   has_many :collections
+  has_many :collection_items
+  has_many :proposal_requests
   has_many :tasks
   has_many :messages
   has_many :chatrooms, through: :messages

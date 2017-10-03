@@ -33,7 +33,7 @@ class ProposalsController < ApplicationController
   # POST /proposals.json
   def create
     @proposal = Proposal.new(proposal_params)
-
+    set_price
     respond_to do |format|
       if @proposal.save
         format.html { redirect_to @proposal, notice: 'Proposal was successfully created.' }
@@ -84,7 +84,29 @@ class ProposalsController < ApplicationController
   def payment
   end
 
+  def create_request
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal_request = ProposalRequest.create(requested_by: current_user.id, requested: User.find(params[:user_id]).id, proposal_id: @proposal.id )
+    redirect_to @proposal
+  end
+
+  def accept_request
+  end
+
+  def approve_request
+  end
+
   private
+    def set_price
+      if @proposal.proposal_type == 'Photo'
+        @proposal.price = 4000
+      elsif @proposal.proposal_type == 'Video'
+        @proposal.price = 8000
+      elsif @proposal.proposal_type == 'Drone'
+        @proposal.price = 1000
+      end
+
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_proposal
       unless params[:id].nil?

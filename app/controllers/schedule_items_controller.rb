@@ -4,7 +4,7 @@ class ScheduleItemsController < ApplicationController
   # GET /schedule_items
   # GET /schedule_items.json
   def index
-    @schedule_items = ScheduleItem.where(user: current_user)
+    @schedule_items = ScheduleItem.where(user: current_user).order(:start_date)
   end
 
   # GET /schedule_items/1

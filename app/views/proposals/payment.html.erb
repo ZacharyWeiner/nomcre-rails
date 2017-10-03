@@ -1,1 +1,5 @@
-<%= render 'proposals/partials/deposit_payment'%>
+<% if @proposal.deposit_paid == true %>
+  <%= render 'proposals/partials/balance_payment' %>
+<% else %>
+  <%= render 'proposals/partials/deposit_payment' %>
+<% end %>
