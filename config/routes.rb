@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   post 'charges/balance/:proposal_id', to: 'charges#proposal_balance', as: 'proposal_balance'
 
   get '/notifications', to: 'notifications#index', as: 'notifications'
+
+  get '/dashboard/company', to: 'dashboards#company_dashboard', as: 'company_dashboard'
+  get 'dashboard/creative', to: 'dashboards#creative_dashboard', as: 'creative_dashboard'
   # Application root
   root to: 'application#home'
   # Front routes end
