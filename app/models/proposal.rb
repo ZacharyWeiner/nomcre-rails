@@ -4,6 +4,7 @@ class Proposal < ApplicationRecord
   belongs_to :location
   has_many :tasks
   has_many :proposal_requests
+  has_one :chatroom
   paginates_per 20
   mount_uploader :model_release, FileUploader
 

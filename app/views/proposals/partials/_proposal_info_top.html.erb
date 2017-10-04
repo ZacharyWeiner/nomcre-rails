@@ -22,9 +22,10 @@
       </li>
     </ul>
 
-    <% if current_user.company ==  @proposal.company %>
+    <% if (current_user.company ==  @proposal.company) && @proposal.accepted != true %>
       <%= link_to 'Edit', edit_proposal_path(@proposal), class: "btn btn-primary btn-block" %>
     <% end %>
+    <%= link_to 'Chat', chatroom_path(@proposal.chatroom), class: "btn btn-primary btn-block" %>
     <% if  @proposal.deposit_paid == true %>
       <%= link_to 'Deposit Paid', "#", class: "btn btn-success btn-block disabled" %>
     <% else %>

@@ -38,10 +38,10 @@ class ProposalsController < ApplicationController
   # POST /proposals.json
   def create
     @proposal = Proposal.new(proposal_params)
-    set_price
     respond_to do |format|
       if @proposal.save
-        @chatroom = Chatroom.create!(topic: @proposal.title)
+        set_price(@proposal)
+        @chatroom = Chatroom.create!(topic: @proposal.title, proposal: @proposal)
         @chatroom.messages.create!(user: current_user, content: "#{@proposal.company.name}' - '#{@proposal.title} Chat Was Created")
         format.html { redirect_to @proposal, notice: 'Proposal was successfully created.' }
         format.json { render :show, status: :created, location: @proposal }
@@ -56,6 +56,9 @@ class ProposalsController < ApplicationController
   # PATCH/PUT /proposals/1.json
   def update
     respond_to do |format|
+      if @proposal.accepted == true
+        format.html { redirect_to @proposal, notice: 'The Proposal Can Not Be Changed After It Has Been Assigned' }
+      end
       unless params[:proposal][:bts].nil? || params[:proposal][:bts].count == 0
         @proposal.bts.clear
         params[:proposal][:bts].each do |bt|
@@ -125,10 +128,12 @@ class ProposalsController < ApplicationController
     @proposal.accepted = true
     @proposal.user = User.find(@proposal_request.requested)
     @proposal.save
+    @proposal.create_tasks
     @proposal.tasks.each do |task|
       task.user_id = @proposal_request.requested
       task.save
     end
+    @proposal.chatroom.messages.create!(user: @proposal.user, content: "#{@proposal.user.name has been added to the chat}")
     send_notification(@proposal_request.requested, "Proposal Assigned", @proposal.id)
     send_notification(@proposal_request.requested, "Task", @proposal.id)
     redirect_to @proposal
@@ -142,15 +147,15 @@ class ProposalsController < ApplicationController
       end
     end
 
-    def set_price
-      if @proposal.proposal_type == 'Photo'
-        @proposal.price = 4000
-      elsif @proposal.proposal_type == 'Video'
-        @proposal.price = 8000
-      elsif @proposal.proposal_type == 'Drone'
-        @proposal.price = 1000
+    def set_price(proposal)
+      if proposal.proposal_type == 'photo'
+        proposal.price =  4000
+      elsif proposal.proposal_type == 'video'
+        proposal.price =  4000
+      elsif proposal.proposal_type == 'drone'
+        proposal.price =  1000
       end
-
+      proposal.save
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_proposal
