@@ -41,6 +41,8 @@ class ProposalsController < ApplicationController
     set_price
     respond_to do |format|
       if @proposal.save
+        @chatroom = Chatroom.create!(topic: @proposal.title)
+        @chatroom.messages.create!(user: current_user, content: "#{@proposal.company.name}' - '#{@proposal.title} Chat Was Created")
         format.html { redirect_to @proposal, notice: 'Proposal was successfully created.' }
         format.json { render :show, status: :created, location: @proposal }
       else
