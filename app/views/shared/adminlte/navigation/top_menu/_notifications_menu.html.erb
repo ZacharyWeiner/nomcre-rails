@@ -1,4 +1,4 @@
-<% @notifications = Notification.where(user: current_user).where(read:false).where.not(notification_type: "New Message") %>
+<% @notifications = Notification.where(user: current_user).where(read:false).where.not(notification_type: "New Message").where.not(notification_type: "Task") %>
 <li class="dropdown notifications-menu">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
     <i class="fa fa-bell-o"></i>
@@ -13,14 +13,17 @@
       <ul class="menu">
         <% @notifications.each do |notification| %>
         <li>
-          <% if notification.notification_type == "New Message" %>
-            <% @chatroom = Chatroom.find(notification.notification_obeject_id)%>
-            <%= link_to "New Message in #{@chatroom.topic}", chatroom_path(@chatroom) %>
+          <% if notification.notification_type == "New Request" %>
+            <%= link_to "New Work Request", proposal_requests_path %>
+          <% elsif notification.notification_type == "Request Accepted" %>
+            <%= link_to "Your Request Has Been Accepted", proposal_path(notification.notification_obeject_id) %>
+          <% elsif notification.notification_type == "Proposal Assigned" %>
+            <%= link_to "You have a new job", proposal_path(notification.notification_obeject_id) %>
           <% end %>
         </li>
         <% end %>
       </ul>
     </li>
-    <li class="footer"><a href="#">View all</a></li>
+    <li class="footer"><%= link_to "View all", notifications_path %></a></li>
   </ul>
 </li>

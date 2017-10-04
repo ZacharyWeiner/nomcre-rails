@@ -1,0 +1,36 @@
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Striped Full Width Table</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>Type</th>
+          <th>Sent On</th>
+          <th>View</th>
+        </tr>
+        <% @notifications.each do |note|%>
+        <tr>
+          <td><%= note.notification_type %> </td>
+          <td><%= note.created_at %></td>
+          <td>
+            <% if note.notification_type == "New Request" %>
+              <%= link_to "View", proposal_requests_path, class: 'btn btn-primary'%>
+            <% elsif note.notification_type == "Request Accepted" %>
+              <%= link_to "View", proposal_path(notification_obeject_id), class: 'btn btn-primary'%>
+            <% elsif note.notification_type == "Proposal Assigned" %>
+              <%= link_to "View", proposal_path(notification_obeject_id), class: 'btn btn-primary'%>
+            <% elsif note.notification_type == "New Message" %>
+              <%= link_to "View", chatroom_path(Chatroom.find(note.notification_obeject_id)), class: 'btn btn-primary'%>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+

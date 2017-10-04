@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   resources :charges
   post 'charges/deposit/:proposal_id', to: 'charges#proposal_deposit', as: 'proposal_deposit'
   post 'charges/balance/:proposal_id', to: 'charges#proposal_balance', as: 'proposal_balance'
+
+  get '/notifications', to: 'notifications#index', as: 'notifications'
   # Application root
   root to: 'application#home'
   # Front routes end

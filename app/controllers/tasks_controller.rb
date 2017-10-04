@@ -5,6 +5,11 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.where(user: current_user)
+    @notifications = Notification.where(user: current_user).where(notification_type: "Task").where(read: false)
+    @notifications.each do |note|
+      note.read = true
+      note.save
+    end
   end
 
   # GET /tasks/1

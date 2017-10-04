@@ -15,6 +15,11 @@ class ProposalsController < ApplicationController
   # GET /proposals/1
   # GET /proposals/1.json
   def show
+    @notifications = Notification.where(user: current_user).where(notification_obeject_id: params[:id]).where(read: false)
+    @notifications.each do |note|
+      note.read = true
+      note.save
+    end
   end
 
   # GET /proposals/new
@@ -92,10 +97,12 @@ class ProposalsController < ApplicationController
 
   def create_request
     @proposal = Proposal.find(params[:proposal_id])
-    @proposal_request = ProposalRequest.where(requested: User.find(params[:user_id]).id, proposal_id: @proposal.id ).first
+    @requested = User.find(params[:user_id])
+    @proposal_request = ProposalRequest.where(requested: @requested.id, proposal_id: @proposal.id ).first
     if @proposal_request.nil?
-      @proposal_request = ProposalRequest.create(requested_by: current_user.id, requested: User.find(params[:user_id]).id, proposal_id: @proposal.id )
+      @proposal_request = ProposalRequest.create(requested_by: current_user.id, requested: @requested.id, proposal_id: @proposal.id )
     end
+    send_notification(@requested.id, "New Request", @proposal_request.id)
     redirect_to @proposal
   end
 
@@ -104,6 +111,7 @@ class ProposalsController < ApplicationController
     @proposal_request = ProposalRequest.where(requested: current_user.id, proposal_id: @proposal.id ).first
     @proposal_request.accepted = true
     @proposal_request.save
+    send_notification(@proposal_request.requested_by, "Request Accepted", @proposal.id)
     redirect_to proposal_requests_path
   end
 
@@ -119,10 +127,19 @@ class ProposalsController < ApplicationController
       task.user_id = @proposal_request.requested
       task.save
     end
+    send_notification(@proposal_request.requested, "Proposal Assigned", @proposal.id)
+    send_notification(@proposal_request.requested, "Task", @proposal.id)
     redirect_to @proposal
   end
 
   private
+    def send_notification(user_id, notification_type, request_id)
+      notification = Notification.where(user_id: user_id, notification_type: notification_type, notification_obeject_id: request_id).first
+      if notification.nil?
+        notification = Notification.create!(user_id: user_id, notification_type: notification_type, notification_obeject_id: request_id, read: false)
+      end
+    end
+
     def set_price
       if @proposal.proposal_type == 'Photo'
         @proposal.price = 4000
