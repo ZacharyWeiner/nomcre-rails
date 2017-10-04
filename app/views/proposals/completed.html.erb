@@ -1,0 +1,30 @@
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Completed Work</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>Title</th>
+          <th>Creative</th>
+          <th>Completed On</th>
+          <th>Links</th>
+        </tr>
+        <% @proposals.each do |proposal|%>
+        <tr>
+          <td><%= proposal.title%></td>
+          <td><%= proposal.user.email%></td>
+          <td><%= proposal.completed_on %></td>
+          <td>
+            <div class='row' style='padding-right:24px;'><%= link_to "View", proposal_path(proposal), class: 'btn btn-block btn-primary' %></div>
+            <div class='row' style='padding-right:24px;'><%= link_to "Invoice", "#", class: 'btn btn-block btn-warning' %></div>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+ </div>
+<!-- /.box-body -->
+</div>

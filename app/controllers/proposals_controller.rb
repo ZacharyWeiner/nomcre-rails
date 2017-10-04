@@ -139,6 +139,14 @@ class ProposalsController < ApplicationController
     redirect_to @proposal
   end
 
+  def completed
+    if current_user.user_type.downcase == 'creative'
+      @proposals = Proposal.where(user: current_user).where(completed: true).order(:completed_on).reverse
+    else
+      @proposals = Proposal.where(company: current_user.company).where(completed: true).order(:completed_on).reverse
+    end
+  end
+
   private
     def send_notification(user_id, notification_type, request_id)
       notification = Notification.where(user_id: user_id, notification_type: notification_type, notification_obeject_id: request_id).first

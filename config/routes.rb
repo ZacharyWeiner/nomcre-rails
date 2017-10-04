@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'accept_request', to: 'proposals#accept_request'
   get 'approve_request', to: 'proposals#approve_request'
  end
+ get 'proposal/completed', to: 'proposals#completed', as: 'proposals_completed'
  get 'requests', to: 'proposal_requests#requests', as:'proposal_requests'
   # Back admin routes start
   namespace :admin do
